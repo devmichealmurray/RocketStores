@@ -33,7 +33,7 @@ class StoreViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
     }
 }
 
-class StoreListRecyclerAdapter(private val list: List<StoreObject>): RecyclerView.Adapter<StoreViewHolder>() {
+class StoreListRecyclerAdapter(private val list: ArrayList<StoreObject>): RecyclerView.Adapter<StoreViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
         return StoreViewHolder(
             LayoutInflater
@@ -45,5 +45,11 @@ class StoreListRecyclerAdapter(private val list: List<StoreObject>): RecyclerVie
 
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
         holder.bindStore(list[position])
+    }
+
+    fun updateList(newList: List<StoreObject>) {
+        list.clear()
+        list.addAll(newList)
+        notifyDataSetChanged()
     }
 }

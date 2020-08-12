@@ -25,8 +25,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     private val _storesUpToDate by lazy { MutableLiveData<Boolean>() }
     val storesUpToDate: LiveData<Boolean> get() = _storesUpToDate
 
-    private val _storeList by lazy { MutableLiveData<List<StoreObject>>() }
-    val storeList: LiveData<List<StoreObject>> get() = _storeList
+    private val _storeList by lazy { MutableLiveData<ArrayList<StoreObject>>() }
+    val storeList: LiveData<ArrayList<StoreObject>> get() = _storeList
 
     /**
      *  Set Up Database
@@ -62,17 +62,18 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     private fun updateDB() {
         viewModelScope.launch {
             val checkDB = repository.checkDatabase()
-            if (checkDB.timeStamp != null) {
-                val timestamp = checkDB.timeStamp
-                if (CURRENT_TIME - timestamp > TIME_LAPSE) {
-                    deleteData()
-                    getAllStores()
-                } else {
-                    _storesUpToDate.postValue(true)
-                }
-            } else {
-                getAllStores()
-            }
+            getAllStores()
+//            if (checkDB.timeStamp != null) {
+//                val timestamp = checkDB.timeStamp
+//                if (CURRENT_TIME - timestamp > TIME_LAPSE) {
+//                    deleteData()
+//                    getAllStores()
+//                } else {
+//                    _storesUpToDate.postValue(true)
+//                }
+//            } else {
+//                getAllStores()
+//            }
         }
     }
 
@@ -104,8 +105,10 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     }
 
     private fun getStoreList() {
+        val tempList = ArrayList<StoreObject>()
         viewModelScope.launch {
-            _storeList.postValue(repository.getStores())
+            tempList.addAll(repository.getStores())
+            _storeList.postValue(tempList)
         }
     }
 
