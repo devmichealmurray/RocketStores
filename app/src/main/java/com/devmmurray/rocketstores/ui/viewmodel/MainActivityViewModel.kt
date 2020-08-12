@@ -12,6 +12,7 @@ import com.devmmurray.rocketstores.data.repo.DatabaseRepo
 import com.devmmurray.rocketstores.data.repo.RocketApiRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 // Current Time for TimeStamp
 private val CURRENT_TIME: Long = System.currentTimeMillis()
@@ -27,6 +28,15 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
 
     private val _storeList by lazy { MutableLiveData<ArrayList<StoreObject>>() }
     val storeList: LiveData<ArrayList<StoreObject>> get() = _storeList
+
+    private val _ioExceptionAlert by lazy { MutableLiveData<Boolean>() }
+    val ioExceptionAlert: LiveData<Boolean> get() = _ioExceptionAlert
+
+    private val _unknownException by lazy { MutableLiveData<String>() }
+    val unknownException: LiveData<String> get() = _unknownException
+
+    private val _error by lazy { MutableLiveData<Boolean>() }
+    val error: LiveData<Boolean> get() = _error
 
     /**
      *  Set Up Database
@@ -62,48 +72,63 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
     private fun updateDB() {
         viewModelScope.launch {
             val checkDB = repository.getStores()
-            if (checkDB.isNotEmpty() && checkDB[0].timeStamp != null) {
-                if (CURRENT_TIME - checkDB[0].timeStamp!! > TIME_LAPSE) {
+
+            if (checkDB.isNotEmpty()) {
+                if ((checkDB.size < 20) || (CURRENT_TIME - checkDB[0].timeStamp!! > TIME_LAPSE)) {
                     deleteData()
                     getAllStores()
                 } else {
                     _storesUpToDate.postValue(true)
                 }
             } else {
-                _storesUpToDate.postValue(true)
+                getAllStores()
             }
         }
-
     }
 
     private fun getAllStores() {
         viewModelScope.launch {
-            val result = RocketApiRepo.getRocketStores()
-            result.body()?.stores?.forEach {
-                val store = StoreEntity(
-                    timeStamp = CURRENT_TIME,
-                    address = it.address,
-                    city = it.city,
-                    name = it.name,
-                    latitude = it.latitude,
-                    zipcode = it.zipcode,
-                    logo = it.storeLogoAddress,
-                    phone = it.phone,
-                    longitude = it.longitude,
-                    storeId = it.storeId,
-                    state = it.state
-                )
-                addStore(store)
+
+            try {
+                val result = RocketApiRepo.getRocketStores()
+
+                if (result.isSuccessful) {
+                    result.body()?.stores?.forEach {
+                        val store = StoreEntity(
+                            timeStamp = CURRENT_TIME,
+                            address = it.address,
+                            city = it.city,
+                            name = it.name,
+                            latitude = it.latitude,
+                            zipcode = it.zipcode,
+                            logo = it.storeLogoAddress,
+                            phone = it.phone,
+                            longitude = it.longitude,
+                            storeId = it.storeId,
+                            state = it.state
+                        )
+                        addStore(store)
+                    }
+                } else {
+                    _error.postValue(true)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                _ioExceptionAlert.value = true
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _unknownException.value = e.message
             }
+            _storesUpToDate.postValue(true)
         }
-        _storesUpToDate.postValue(true)
+
     }
 
-    fun getStores() {
-        getStoreList()
+    fun getStoreList() {
+        getStoreListFromDB()
     }
 
-    private fun getStoreList() {
+    private fun getStoreListFromDB() {
         val tempList = ArrayList<StoreObject>()
         viewModelScope.launch {
             tempList.addAll(repository.getStores())

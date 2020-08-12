@@ -58,6 +58,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    // Swipe Refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
     // Retrofit & Moshi
     implementation 'com.squareup.moshi:moshi:1.8.0'
     implementation "com.squareup.retrofit2:converter-moshi:2.6.0"

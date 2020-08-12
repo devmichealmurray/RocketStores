@@ -3,7 +3,7 @@
     package="com.devmmurray.rocketstores">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Launcher">
         <activity android:name=".ui.view.StoreDetail"></activity>
         <activity android:name=".ui.view.MainActivity">
             <intent-filter>
