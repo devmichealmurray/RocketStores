@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.devmmurray.rocketstores.data.model.domain.StoreObject
 import com.devmmurray.rocketstores.data.model.entity.StoreEntity
 
 @Dao
@@ -19,7 +20,7 @@ interface StoreDAO {
 
     // Check DB Content
     @Query("SELECT * FROM stores LIMIT 1")
-    suspend fun checkDatabase(): StoreEntity
+    suspend fun checkDatabase(): StoreObject
 
     // Delete All Stores From DB
     @Query("DELETE FROM stores")

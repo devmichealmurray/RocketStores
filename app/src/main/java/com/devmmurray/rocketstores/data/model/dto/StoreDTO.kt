@@ -31,4 +31,10 @@ data class StoreData(
     val storeId: String?,
     @Json(name = "state")
     val state: String?
-)
+) {
+    val storeLogoAddress: String? by lazy { buildURL() }
+    private fun buildURL(): String? {
+        val subUrl = logo?.substring(5)
+        return "https:$subUrl".trim()
+    }
+}

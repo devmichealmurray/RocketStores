@@ -49,7 +49,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             repository.addStore(store)
         }
 
-    private fun deleteData() {
+    fun deleteData() {
         viewModelScope.launch {
             repository.deleteAllStores()
         }
@@ -61,20 +61,19 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private fun updateDB() {
         viewModelScope.launch {
-            val checkDB = repository.checkDatabase()
-            getAllStores()
-//            if (checkDB.timeStamp != null) {
-//                val timestamp = checkDB.timeStamp
-//                if (CURRENT_TIME - timestamp > TIME_LAPSE) {
-//                    deleteData()
-//                    getAllStores()
-//                } else {
-//                    _storesUpToDate.postValue(true)
-//                }
-//            } else {
-//                getAllStores()
-//            }
+            val checkDB = repository.getStores()
+            if (checkDB.isNotEmpty() && checkDB[0].timeStamp != null) {
+                if (CURRENT_TIME - checkDB[0].timeStamp!! > TIME_LAPSE) {
+                    deleteData()
+                    getAllStores()
+                } else {
+                    _storesUpToDate.postValue(true)
+                }
+            } else {
+                _storesUpToDate.postValue(true)
+            }
         }
+
     }
 
     private fun getAllStores() {
@@ -88,7 +87,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                     name = it.name,
                     latitude = it.latitude,
                     zipcode = it.zipcode,
-                    logo = it.logo,
+                    logo = it.storeLogoAddress,
                     phone = it.phone,
                     longitude = it.longitude,
                     storeId = it.storeId,
