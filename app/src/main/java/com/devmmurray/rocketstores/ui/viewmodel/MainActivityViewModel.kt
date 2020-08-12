@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 private val CURRENT_TIME: Long = System.currentTimeMillis()
 private const val TIME_LAPSE: Long = 2_592_000_000
 
-class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
+open class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      *  Live Data Values To Update Main Activity
@@ -32,7 +32,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
      *  Set Up Database
      */
 
-    private val repository: DatabaseRepo
+    val repository: DatabaseRepo
 
     init {
         val storeDAO = RoomDatabaseClient.getDbInstance(application).storeDao()

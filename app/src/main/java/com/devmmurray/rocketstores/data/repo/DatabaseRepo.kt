@@ -22,4 +22,7 @@ class DatabaseRepo(
 
     suspend fun deleteAllStores() =
         storeDataSource.deleteStores()
+
+    suspend fun getStoreById(id: Long) =
+        storeDataSource.getStoreById(id)
 }

@@ -25,4 +25,8 @@ interface StoreDAO {
     // Delete All Stores From DB
     @Query("DELETE FROM stores")
     suspend fun deleteStores()
+
+    // Get Store By UID
+    @Query("SELECT * FROM stores WHERE uid = :uid")
+    suspend fun getStoreById(uid: Long): StoreObject
 }

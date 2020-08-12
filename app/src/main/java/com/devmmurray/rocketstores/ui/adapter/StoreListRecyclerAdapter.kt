@@ -13,7 +13,7 @@ import com.devmmurray.rocketstores.ui.view.StoreDetail
 import com.squareup.picasso.Picasso
 
 
-private const val STORE_ID = "store_id"
+const val STORE_ID = "store_id"
 
 class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun bindStore(store: StoreObject) {

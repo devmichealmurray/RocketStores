@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RocketStores</string>
+    <string name="store_name">Store Name</string>
+    <string name="store_number">Store Number</string>
 </resources>
