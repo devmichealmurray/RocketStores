@@ -1,6 +1,7 @@
 package com.devmmurray.rocketstores.ui.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,8 @@ class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun bindStore(store: StoreObject) {
 
         view.setOnClickListener {
-            moveToDetailActivity(view, store.uid.toInt())
+            Log.d("Click Listener", "******* UID: ${store.uid} ********")
+            moveToDetailActivity(view, store.uid)
         }
 
         val imageHolder: ImageView = view.findViewById(R.id.storeLogo)
@@ -41,7 +43,7 @@ class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         storePhone.text = store.phone
     }
 
-    private fun moveToDetailActivity(view: View, id: Int) {
+    private fun moveToDetailActivity(view: View, id: Long) {
         val viewContext = view.context
         val intent = Intent(viewContext, StoreDetail::class.java)
         intent.putExtra(STORE_ID, id)

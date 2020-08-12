@@ -1,7 +1,7 @@
 package com.devmmurray.rocketstores.data.model.domain
 
 class StoreObject(
-    var uid: Long = 0L,
+    val uid: Long = 0L,
     val timeStamp: Long?,
     val address: String?,
     val city: String?,
