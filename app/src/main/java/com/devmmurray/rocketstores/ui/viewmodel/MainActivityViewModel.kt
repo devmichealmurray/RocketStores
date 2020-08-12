@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.devmmurray.rocketstores.data.database.RoomDatabaseClient
+import com.devmmurray.rocketstores.data.model.domain.StoreObject
 import com.devmmurray.rocketstores.data.model.entity.StoreEntity
 import com.devmmurray.rocketstores.data.repo.DatabaseRepo
 import com.devmmurray.rocketstores.data.repo.RocketApiRepo
@@ -24,6 +25,9 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     private val _storesUpToDate by lazy { MutableLiveData<Boolean>() }
     val storesUpToDate: LiveData<Boolean> get() = _storesUpToDate
 
+    private val _storeList by lazy { MutableLiveData<List<StoreObject>>() }
+    val storeList: LiveData<List<StoreObject>> get() = _storeList
+
     /**
      *  Set Up Database
      */
@@ -39,6 +43,11 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     /**
      *  Database Functions
      */
+
+    private fun addStore(store: StoreEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addStore(store)
+        }
 
     private fun deleteData() {
         viewModelScope.launch {
@@ -90,9 +99,14 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         _storesUpToDate.postValue(true)
     }
 
+    fun getStores() {
+        getStoreList()
+    }
 
-    private fun addStore(store: StoreEntity) =
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addStore(store)
+    private fun getStoreList() {
+        viewModelScope.launch {
+            _storeList.postValue(repository.getStores())
         }
+    }
+
 }
