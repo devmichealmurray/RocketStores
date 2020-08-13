@@ -30,7 +30,12 @@ class StoreDetail : AppCompatActivity() {
         val store = intent.extras?.getLong(STORE_ID)
         storeDetailViewModel.getStore(store)
         storeDetailViewModel.store.observe(this, storeObserver)
+
+        backArrow.setOnClickListener {
+            finish()
+        }
     }
+
 
     private val storeObserver = Observer<StoreEntity> {
         Picasso.get()

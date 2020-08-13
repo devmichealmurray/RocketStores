@@ -9,7 +9,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.devmmurray.rocketstores.R
 import com.devmmurray.rocketstores.data.model.domain.StoreObject
 import com.devmmurray.rocketstores.ui.adapter.StoreListRecyclerAdapter
@@ -33,13 +33,13 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel.storesUpToDate.observe(this, storesUpToDateObserver)
         mainActivityViewModel.storeList.observe(this, storeListObserver)
 
-        // Exception Handling
+        // Live Data Observers for Exception Handling
         mainActivityViewModel.ioExceptionAlert.observe(this, ioAlertObserver)
         mainActivityViewModel.unknownException.observe(this, exceptionAlertObserver)
         mainActivityViewModel.error.observe(this, errorObserver)
 
         storeListRecycler.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            GridLayoutManager(this, 2)
     }
 
 

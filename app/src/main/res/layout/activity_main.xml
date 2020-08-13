@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.MainActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logoBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
     <ImageView
         android:id="@+id/brLogo"
         android:layout_width="match_parent"
@@ -21,24 +30,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="74dp"
         android:text="S  T  O  R  E  S"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorDkGray"
         android:textSize="32sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/storeListRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stores" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/storeListRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoBack" />
 
 
     <TextView
@@ -62,6 +71,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stores" />
+        app:layout_constraintTop_toBottomOf="@id/logoBack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

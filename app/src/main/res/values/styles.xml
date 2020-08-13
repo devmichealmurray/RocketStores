@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppTheme.Launcher">
@@ -20,8 +21,10 @@
         <item name="android:background">@drawable/standard_button_background</item>
     </style>
 
-    <style name ="StandardText">
+    <style name ="CardText">
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorDkGray</item>
+        <item name="android:gravity">left</item>
     </style>
 
     <style name ="DetailText">

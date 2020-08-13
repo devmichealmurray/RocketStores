@@ -27,8 +27,6 @@ class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val imageHolder: ImageView = view.findViewById(R.id.storeLogo)
         val storeName: TextView = view.findViewById(R.id.storeName)
         val storeAddress: TextView = view.findViewById(R.id.storeAddress)
-        val storeCityState: TextView = view.findViewById(R.id.storeCityState)
-        val storePhone: TextView = view.findViewById(R.id.storePhone)
 
         Picasso.get()
             .load(store.logo)
@@ -39,8 +37,6 @@ class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         storeName.text = store.name
         storeAddress.text = store.address
-        storeCityState.text = "${store.city}, ${store.state} ${store.zipcode}"
-        storePhone.text = store.phone
     }
 
     private fun moveToDetailActivity(view: View, id: Long) {
