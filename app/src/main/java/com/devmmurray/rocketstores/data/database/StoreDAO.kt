@@ -4,11 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.devmmurray.rocketstores.data.model.domain.StoreObject
 import com.devmmurray.rocketstores.data.model.entity.StoreEntity
 
 @Dao
 interface StoreDAO {
+
+    /**
+     *  Database Functions, only accessible through the Repo
+     */
 
     // Add Stores to DB
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -17,10 +20,6 @@ interface StoreDAO {
     // Retrieve Stores From DB
     @Query("SELECT * FROM stores")
     suspend fun getStores(): MutableList<StoreEntity>
-
-    // Check DB Content
-    @Query("SELECT * FROM stores LIMIT 1")
-    suspend fun checkDatabase(): StoreObject
 
     // Delete All Stores From DB
     @Query("DELETE FROM stores")

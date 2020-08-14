@@ -22,14 +22,15 @@
             android:src="@drawable/placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/bottle_rocket_logo" />
 
         <TextView
             android:id="@+id/stores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="74dp"
-            android:text="S  T  O  R  E  S"
+            android:text="@string/s_t_o_r_e_s"
             android:textColor="@color/colorDkGray"
             android:textSize="32sp"
             android:textStyle="italic"
@@ -50,7 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoBack"
-        app:navGraph="@navigation/rocket_stores_nav" />
+        app:navGraph="@navigation/rocket_stores_nav"
+        tools:ignore="FragmentTagUsage" />
 
 
     <TextView

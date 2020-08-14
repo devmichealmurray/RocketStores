@@ -32,6 +32,8 @@ data class StoreData(
     @Json(name = "state")
     val state: String?
 ) {
+
+    // Correct the http to https issue
     val storeLogoAddress: String? by lazy { buildURL() }
     private fun buildURL(): String? {
         val subUrl = logo?.substring(5)

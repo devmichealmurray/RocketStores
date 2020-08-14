@@ -7,7 +7,6 @@
     android:background="@drawable/recycler_background"
     android:padding="4dp">
 
-
     <ImageView
         android:id="@+id/storeLogo"
         android:layout_width="match_parent"
@@ -15,7 +14,8 @@
         android:layout_margin="4dp"
         android:src="@drawable/placeholder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/store_logo" />
 
     <TextView
         android:id="@+id/storeName"
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Store Name"
+        android:text="@string/store_name"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:maxLines="1"
-        android:text="1234 Store Address"
+        android:text="@string/_1234_store_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/storeName" />

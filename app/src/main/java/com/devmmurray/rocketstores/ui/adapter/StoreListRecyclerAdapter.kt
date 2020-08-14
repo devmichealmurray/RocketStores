@@ -1,7 +1,6 @@
 package com.devmmurray.rocketstores.ui.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,12 @@ import com.devmmurray.rocketstores.data.model.domain.StoreObject
 import com.devmmurray.rocketstores.ui.view.activities.StoreDetail
 import com.squareup.picasso.Picasso
 
-
 const val STORE_ID = "store_id"
 
 class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun bindStore(store: StoreObject) {
 
         view.setOnClickListener {
-            Log.d("Click Listener", "******* UID: ${store.uid} ********")
             moveToDetailActivity(view, store.uid)
         }
 
@@ -47,8 +44,10 @@ class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     }
 }
 
+
 class StoreListRecyclerAdapter(private val list: ArrayList<StoreObject>) :
     RecyclerView.Adapter<StoreViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
 
         return StoreViewHolder(

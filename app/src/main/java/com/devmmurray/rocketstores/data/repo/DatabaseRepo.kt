@@ -8,7 +8,7 @@ class DatabaseRepo(
 ) {
 
     /**
-     *  Database Functions
+     *  Access to Database Functions via Repository
      */
 
     suspend fun addStore(store: StoreEntity) =
@@ -16,9 +16,6 @@ class DatabaseRepo(
 
     suspend fun getStores() =
         storeDataSource.getStores().map { it.toStoreObject() }
-
-    suspend fun checkDatabase() =
-        storeDataSource.checkDatabase()
 
     suspend fun deleteAllStores() =
         storeDataSource.deleteStores()

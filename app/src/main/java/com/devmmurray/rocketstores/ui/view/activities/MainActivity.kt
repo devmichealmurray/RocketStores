@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setUpNavigation()
 
+        /**
+         *  checkForUpdates checks that database is not empty and the
+         *  list is not over a month old. If database is empty or list
+         *  needs to be refreshed, old data is deleted and a new
+         *  network call is made.
+         */
         mainActivityViewModel.checkForUpdate()
 
         // Live Data Observers for Exception Handling
@@ -35,8 +41,8 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel.error.observe(this, errorObserver)
     }
 
+    // Function to set up Bottom Navigation Bar
     private fun setUpNavigation() {
-        // Sets Up Bottom Navigation Bar
         val bottomNavBar: BottomNavigationView = findViewById(R.id.bottom_nav)
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
@@ -46,8 +52,11 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+
+
     /**
      *  Observers for exception handling
+     *  Put Nothing Below
      */
 
     private val ioAlertObserver = Observer<Boolean> { ioException ->

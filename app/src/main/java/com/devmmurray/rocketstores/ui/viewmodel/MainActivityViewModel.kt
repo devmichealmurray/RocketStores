@@ -21,10 +21,11 @@ private const val TIME_LAPSE: Long = 2_592_000_000
 open class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
-     *  Set Up Database
+     *  Sets Up Database
      */
 
     val repository: DatabaseRepo
+
     init {
         val storeDAO = RoomDatabaseClient.getDbInstance(application).storeDao()
         repository = DatabaseRepo(storeDAO)
@@ -42,7 +43,7 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
         }
 
     // Deletes All Database Information
-    fun deleteData() {
+    private fun deleteData() {
         viewModelScope.launch {
             repository.deleteAllStores()
         }
@@ -71,9 +72,39 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
         }
     }
 
-    // Retrieves all store information from Bottle Rocket then uses the addStore function
-    // to save store data to the database
-    // Exceptions are handled through Live Data to alert the user of errors
+    // Retrieves stores from the Database
+    fun getStoreList(city: String) {
+        getStoreListFromDB(city)
+    }
+
+    private fun getStoreListFromDB(city: String) {
+        val list = ArrayList<StoreObject>()
+        val tampa = ArrayList<StoreObject>()
+        val clearwater = ArrayList<StoreObject>()
+        viewModelScope.launch {
+            when (city) {
+                "tampa" -> {
+                    tampa.addAll(repository.getStoreByCity("Tampa"))
+                    _tampaList.postValue(tampa)
+                }
+                "clearwater" -> {
+                    clearwater.addAll(repository.getStoreByCity("Clearwater"))
+                    _clearwaterList.postValue(clearwater)
+                }
+                else -> {
+                    list.addAll(repository.getStores())
+                    _storeList.postValue(list)
+                }
+            }
+        }
+    }
+
+    /**
+     * API Function -- Retrieves all store information from Bottle Rocket
+     * then uses the addStore function to save store data to the database
+     * Exceptions are handled through Live Data to alert the user of errors
+     */
+
     private fun getAllStores() {
         viewModelScope.launch {
             try {
@@ -111,35 +142,10 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
 
     }
 
-    fun getStoreList(city: String) {
-        getStoreListFromDB(city)
-    }
-
-    private fun getStoreListFromDB(city: String) {
-        val list = ArrayList<StoreObject>()
-        val tampa = ArrayList<StoreObject>()
-        val clearwater = ArrayList<StoreObject>()
-        viewModelScope.launch {
-            when (city) {
-                "tampa" -> {
-                    tampa.addAll(repository.getStoreByCity("Tampa"))
-                    _tampaList.postValue(tampa)
-                }
-                "clearwater" -> {
-                    clearwater.addAll(repository.getStoreByCity("Clearwater"))
-                    _clearwaterList.postValue(clearwater)
-                }
-                else -> {
-                    list.addAll(repository.getStores())
-                    _storeList.postValue(list)
-                }
-            }
-        }
-    }
-
 
     /**
      *  Live Data Values To Update Main Activity
+     *  Add Nothing Below
      */
     private val _storesUpToDate by lazy { MutableLiveData<Boolean>() }
     val storesUpToDate: LiveData<Boolean> get() = _storesUpToDate

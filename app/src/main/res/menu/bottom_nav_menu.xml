@@ -6,7 +6,7 @@
         android:id="@+id/home"
         app:showAsAction="always"
         android:orderInCategory="1"
-        android:title="Home"/>
+        android:title="@string/home"/>
 
     <item
         android:id="@+id/all"

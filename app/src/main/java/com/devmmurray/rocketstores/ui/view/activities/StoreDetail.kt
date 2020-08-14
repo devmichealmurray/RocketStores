@@ -27,6 +27,14 @@ class StoreDetail : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_store_detail)
         supportActionBar?.hide()
 
+        /** Store Detail Activity receives the store's unique UID number passed
+         * from the StoreViewHolder
+         * The UID is passed to the getStore function in the VM to retrieve
+         * the store information from the database
+         * When the store has been retrieved the Store Live Data is triggered and the
+         * storeObserver sets up the UI
+         */
+
         val store = intent.extras?.getLong(STORE_ID)
         storeDetailViewModel.getStore(store)
         storeDetailViewModel.store.observe(this, storeObserver)
@@ -35,7 +43,6 @@ class StoreDetail : AppCompatActivity() {
             finish()
         }
     }
-
 
     private val storeObserver = Observer<StoreEntity> {
         Picasso.get()

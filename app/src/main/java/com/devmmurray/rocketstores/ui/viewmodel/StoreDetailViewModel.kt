@@ -12,18 +12,8 @@ class StoreDetailViewModel(application: Application): MainActivityViewModel(appl
     private val _store by lazy { MutableLiveData<StoreEntity>() }
     val store: LiveData<StoreEntity> get() = _store
 
-//
-//    fun mapIt(lat: String?, long: String?) {
-//        locateOnMap(lat, long)
-//    }
-//
-//    private fun locateOnMap(lat: String?, long: String?) {
-//        val gmmIntentUri = Uri.parse("geo:$lat, $long")
-//        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-//        mapIntent.setPackage("com.google.android.apps.maps")
-//        getApplication().startActivity(mapIntent)
-//    }
-
+    // Function to retrieve individual store data using the unique UID passed from
+    // StoreViewHolder
     fun getStore(id: Long?) {
         getStoreById(id)
     }

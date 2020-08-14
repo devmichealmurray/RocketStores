@@ -1,4 +1,5 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
     <string name="app_name">RocketStores</string>
     <string name="store_name">Store Name</string>
     <string name="store_number">Store Number</string>
@@ -12,6 +13,19 @@
     <string name="all">All</string>
     <string name="tampa">Tampa</string>
     <string name="clearwater">Clearwater</string>
-
+    <string name="git_hub">GIT HUB</string>
+    <string name="_1234_store_address">1234 Store Address</string>
+    <string name="store_logo">Store Logo</string>
+    <string name="_214_736_9162" tools:ignore="TypographyDashes">(214) 736-9162</string>
+    <string name="michealmurray16_gmail_com">michealmurray16@gmail.com</string>
+    <string name="https_github_com_devmichealmurray">https://github.com/devmichealmurray</string>
+    <string name="micheal_murray">Micheal Murray</string>
+    <string name="head_shot_of_micheal_murray">Head Shot of Micheal Murray</string>
+    <string name="email">Email</string>
+    <string name="back_arrow">Back Arrow</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="bottle_rocket_logo">Bottle Rocket Logo</string>
+    <string name="s_t_o_r_e_s">S T O R E S</string>
+    <string name="home">Home</string>
 
 </resources>

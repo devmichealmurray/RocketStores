@@ -15,14 +15,15 @@
         android:src="@drawable/headshot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/head_shot_of_micheal_murray" />
 
     <TextView
         android:id="@+id/name"
         style="@style/AboutText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Micheal Murray"
+        android:text="@string/micheal_murray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.291"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +34,7 @@
         style="@style/AboutText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="(214) 736-9162"
+        android:text="@string/_214_736_9162"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,7 @@
         style="@style/AboutText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="michealmurray16@gmail.com"
+        android:text="@string/michealmurray16_gmail_com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number" />
@@ -54,10 +55,52 @@
         style="@style/AboutText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="https://github.com/devmichealmurray"
+        android:text="@string/https_github_com_devmichealmurray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
+
+
+    <Button
+        android:id="@+id/gitButton"
+        style="@style/StandardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/git_hub"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/git" />
+
+    <Button
+        android:id="@+id/callMeButton"
+        style="@style/StandardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/call"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/gitButton"
+        app:layout_constraintTop_toBottomOf="@id/git" />
+
+    <Button
+        android:id="@+id/emailMe"
+        style="@style/StandardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/email"
+        app:layout_constraintBaseline_toBaselineOf="@+id/callMeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/callMeButton"
+        app:layout_constraintTop_toBottomOf="@id/git" />
 
 
 

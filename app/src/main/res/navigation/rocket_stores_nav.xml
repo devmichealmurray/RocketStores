@@ -36,6 +36,7 @@
             android:id="@+id/action_all_to_home2"
             app:destination="@id/home" />
     </fragment>
+
     <fragment
         android:id="@+id/clearwater"
         android:name="com.devmmurray.rocketstores.ui.view.fragments.ClearwaterFragment"
@@ -51,6 +52,7 @@
             android:id="@+id/action_clearwater_to_home2"
             app:destination="@id/home" />
     </fragment>
+
     <fragment
         android:id="@+id/tampa"
         android:name="com.devmmurray.rocketstores.ui.view.fragments.TampaFragment"
