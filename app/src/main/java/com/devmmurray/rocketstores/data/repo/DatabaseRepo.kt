@@ -25,4 +25,7 @@ class DatabaseRepo(
 
     suspend fun getStoreById(id: Long) =
         storeDataSource.getStoreById(id)
+
+    suspend fun getStoreByCity(city: String) =
+        storeDataSource.getStoreByCity(city).map { it.toStoreObject() }
 }

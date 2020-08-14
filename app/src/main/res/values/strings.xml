@@ -6,7 +6,12 @@
     <string name="city_state_zip">City, State Zip</string>
     <string name="directions">DIRECTIONS</string>
     <string name="call">CALL</string>
-    <string name="an_error_occured_while_loading">An Error Occured While Loading</string>
+    <string name="an_error_occurred_while_loading">An Error Occurred While Loading</string>
     <string name="okay">Okay</string>
     <string name="unknown_error">Unknown Error</string>
+    <string name="all">All</string>
+    <string name="tampa">Tampa</string>
+    <string name="clearwater">Clearwater</string>
+
+
 </resources>

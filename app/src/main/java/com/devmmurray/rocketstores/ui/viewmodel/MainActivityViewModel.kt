@@ -21,29 +21,10 @@ private const val TIME_LAPSE: Long = 2_592_000_000
 open class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
-     *  Live Data Values To Update Main Activity
-     */
-    private val _storesUpToDate by lazy { MutableLiveData<Boolean>() }
-    val storesUpToDate: LiveData<Boolean> get() = _storesUpToDate
-
-    private val _storeList by lazy { MutableLiveData<ArrayList<StoreObject>>() }
-    val storeList: LiveData<ArrayList<StoreObject>> get() = _storeList
-
-    private val _ioExceptionAlert by lazy { MutableLiveData<Boolean>() }
-    val ioExceptionAlert: LiveData<Boolean> get() = _ioExceptionAlert
-
-    private val _unknownException by lazy { MutableLiveData<String>() }
-    val unknownException: LiveData<String> get() = _unknownException
-
-    private val _error by lazy { MutableLiveData<Boolean>() }
-    val error: LiveData<Boolean> get() = _error
-
-    /**
      *  Set Up Database
      */
 
     val repository: DatabaseRepo
-
     init {
         val storeDAO = RoomDatabaseClient.getDbInstance(application).storeDao()
         repository = DatabaseRepo(storeDAO)
@@ -54,17 +35,22 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
      *  Database Functions
      */
 
+    // Adds Store to Database
     private fun addStore(store: StoreEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.addStore(store)
         }
 
+    // Deletes All Database Information
     fun deleteData() {
         viewModelScope.launch {
             repository.deleteAllStores()
         }
     }
 
+    //Checks to see if database information is correct and up-to-date
+    // If it is not, deletes all store information and pulls the new list
+    // from Bottle Rocket
     fun checkForUpdate() {
         updateDB()
     }
@@ -77,18 +63,19 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
                 if ((checkDB.size < 20) || (CURRENT_TIME - checkDB[0].timeStamp!! > TIME_LAPSE)) {
                     deleteData()
                     getAllStores()
-                } else {
-                    _storesUpToDate.postValue(true)
                 }
+                _storesUpToDate.postValue(true)
             } else {
                 getAllStores()
             }
         }
     }
 
+    // Retrieves all store information from Bottle Rocket then uses the addStore function
+    // to save store data to the database
+    // Exceptions are handled through Live Data to alert the user of errors
     private fun getAllStores() {
         viewModelScope.launch {
-
             try {
                 val result = RocketApiRepo.getRocketStores()
 
@@ -124,16 +111,55 @@ open class MainActivityViewModel(application: Application) : AndroidViewModel(ap
 
     }
 
-    fun getStoreList() {
-        getStoreListFromDB()
+    fun getStoreList(city: String) {
+        getStoreListFromDB(city)
     }
 
-    private fun getStoreListFromDB() {
-        val tempList = ArrayList<StoreObject>()
+    private fun getStoreListFromDB(city: String) {
+        val list = ArrayList<StoreObject>()
+        val tampa = ArrayList<StoreObject>()
+        val clearwater = ArrayList<StoreObject>()
         viewModelScope.launch {
-            tempList.addAll(repository.getStores())
-            _storeList.postValue(tempList)
+            when (city) {
+                "tampa" -> {
+                    tampa.addAll(repository.getStoreByCity("Tampa"))
+                    _tampaList.postValue(tampa)
+                }
+                "clearwater" -> {
+                    clearwater.addAll(repository.getStoreByCity("Clearwater"))
+                    _clearwaterList.postValue(clearwater)
+                }
+                else -> {
+                    list.addAll(repository.getStores())
+                    _storeList.postValue(list)
+                }
+            }
         }
     }
+
+
+    /**
+     *  Live Data Values To Update Main Activity
+     */
+    private val _storesUpToDate by lazy { MutableLiveData<Boolean>() }
+    val storesUpToDate: LiveData<Boolean> get() = _storesUpToDate
+
+    private val _storeList by lazy { MutableLiveData<ArrayList<StoreObject>>() }
+    val storeList: LiveData<ArrayList<StoreObject>> get() = _storeList
+
+    private val _tampaList by lazy { MutableLiveData<ArrayList<StoreObject>>() }
+    val tampaList: LiveData<ArrayList<StoreObject>> get() = _tampaList
+
+    private val _clearwaterList by lazy { MutableLiveData<ArrayList<StoreObject>>() }
+    val clearwaterList: LiveData<ArrayList<StoreObject>> get() = _clearwaterList
+
+    private val _ioExceptionAlert by lazy { MutableLiveData<Boolean>() }
+    val ioExceptionAlert: LiveData<Boolean> get() = _ioExceptionAlert
+
+    private val _unknownException by lazy { MutableLiveData<String>() }
+    val unknownException: LiveData<String> get() = _unknownException
+
+    private val _error by lazy { MutableLiveData<Boolean>() }
+    val error: LiveData<Boolean> get() = _error
 
 }

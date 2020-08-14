@@ -1,4 +1,4 @@
-package com.devmmurray.rocketstores.ui.view
+package com.devmmurray.rocketstores.ui.view.activities
 
 import android.content.Intent
 import android.net.Uri

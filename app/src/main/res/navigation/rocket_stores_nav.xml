@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rocket_stores_nav"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.devmmurray.rocketstores.ui.view.fragments.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_tampa"
+            app:destination="@id/tampa" />
+        <action
+            android:id="@+id/action_home2_to_all"
+            app:destination="@id/all" />
+        <action
+            android:id="@+id/action_home2_to_clearwater"
+            app:destination="@id/clearwater" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/all"
+        android:name="com.devmmurray.rocketstores.ui.view.fragments.AllFragment"
+        android:label="fragment_all"
+        tools:layout="@layout/fragment_all" >
+        <action
+            android:id="@+id/action_allFragment_to_tampaFragment"
+            app:destination="@id/tampa" />
+        <action
+            android:id="@+id/action_allFragment_to_clearwaterFragment"
+            app:destination="@id/clearwater" />
+        <action
+            android:id="@+id/action_all_to_home2"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/clearwater"
+        android:name="com.devmmurray.rocketstores.ui.view.fragments.ClearwaterFragment"
+        android:label="fragment_clearwater"
+        tools:layout="@layout/fragment_clearwater" >
+        <action
+            android:id="@+id/action_clearwaterFragment_to_tampaFragment"
+            app:destination="@id/tampa" />
+        <action
+            android:id="@+id/action_clearwaterFragment_to_allFragment"
+            app:destination="@id/all" />
+        <action
+            android:id="@+id/action_clearwater_to_home2"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/tampa"
+        android:name="com.devmmurray.rocketstores.ui.view.fragments.TampaFragment"
+        android:label="fragment_tampa"
+        tools:layout="@layout/fragment_tampa" >
+        <action
+            android:id="@+id/action_tampaFragment_to_clearwaterFragment"
+            app:destination="@id/clearwater" />
+        <action
+            android:id="@+id/action_tampaFragment_to_allFragment"
+            app:destination="@id/all" />
+        <action
+            android:id="@+id/action_tampaFragment_to_clearwaterFragment2"
+            app:destination="@id/clearwater" />
+        <action
+            android:id="@+id/action_tampa_to_home2"
+            app:destination="@id/home" />
+    </fragment>
+
+</navigation>

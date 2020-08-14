@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.devmmurray.rocketstores.R
 import com.devmmurray.rocketstores.data.model.domain.StoreObject
-import com.devmmurray.rocketstores.ui.view.StoreDetail
+import com.devmmurray.rocketstores.ui.view.activities.StoreDetail
 import com.squareup.picasso.Picasso
 
 
@@ -50,6 +50,7 @@ class StoreViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 class StoreListRecyclerAdapter(private val list: ArrayList<StoreObject>) :
     RecyclerView.Adapter<StoreViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
+
         return StoreViewHolder(
             LayoutInflater
                 .from(parent.context)

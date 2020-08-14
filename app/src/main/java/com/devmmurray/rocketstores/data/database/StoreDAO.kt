@@ -29,4 +29,8 @@ interface StoreDAO {
     // Get Store By UID
     @Query("SELECT * FROM stores WHERE uid = :uid")
     suspend fun getStoreById(uid: Long): StoreEntity
+
+    // Get Store By City
+    @Query("SELECT * FROM stores WHERE city =:city")
+    suspend fun getStoreByCity(city: String): MutableList<StoreEntity>
 }

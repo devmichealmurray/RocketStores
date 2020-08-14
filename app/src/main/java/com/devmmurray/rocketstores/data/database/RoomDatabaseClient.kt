@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.devmmurray.rocketstores.data.model.entity.StoreEntity
 
-const val DATABASE_SCHEMA_VERSION = 1
+const val DATABASE_SCHEMA_VERSION = 7
 const val DB_NAME = "stores-db"
 
 @Database(
